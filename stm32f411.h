@@ -225,6 +225,12 @@ typedef struct
     volatile uint32_t PR;    // 0x14, Pending register
 } EXTI_RegDef_t;
 
+typedef struct
+{
+    volatile uint32_t CR;  // 0x000, Power control register
+    volatile uint32_t CSR; // 0x004, Power control/status register
+} PWR_RegDef_t;
+
 // Alternate Function Modes
 typedef enum
 {
@@ -283,6 +289,7 @@ typedef enum
 #define EXTI_BASE 0x40013C00UL
 #define SYSCFG_BASE 0x40013800UL
 
+#define PWR_BASE 0x40007000UL
 // ================== Registers ==================
 
 #define RCC ((RCC_RegDef_t *)RCC_BASE)
@@ -319,4 +326,7 @@ typedef enum
 
 #define SYSCFG ((SYSCFG_RegDef_t *)SYSCFG_BASE)
 #define EXTI ((EXTI_RegDef_t *)EXTI_BASE)
+
+#define PWR ((PWR_RegDef_t *)PWR_BASE)
+
 #endif

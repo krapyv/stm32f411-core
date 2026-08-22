@@ -49,11 +49,42 @@ typedef struct
     volatile uint32_t CALIB; // 0x0C
 } SYST_RegDef_t;
 
+typedef struct
+{
+    volatile uint32_t ACTLR; // 0xE000E008 - 0xE000E00B - Auxilary Control Register
+    // CPUID: 0xE000ED00
+    // the first byte after ACTLR: 0xE000E00C
+    // 0xE000ED00 - 0xE000E00C = 0xCF4 = 3316 bytes => 3316 / 4 = 829 uint32_t
+    uint32_t RESERVED0[829];
+    volatile uint32_t CPUID; // 0xE000ED00 - 0xE000ED03 - CPUID Base Register
+    volatile uint32_t ICSR;  // 0xE000ED04 - 0xE000ED07 - Interrupt Control and State Register
+    volatile uint32_t VTOR;  // 0xE000ED08 - 0xE000ED0B - Vector Table Offset Register
+    volatile uint32_t AIRCR; // 0xE000ED0C - 0xE000ED0F - Application Interrupt and Reset Control Register
+    volatile uint32_t SCR;   // 0xE000ED10 - 0xE000ED13 - System Control Register
+    volatile uint32_t CCR;   // 0xE000ED14 - 0xE000ED17 - Configuration and Control Register
+    volatile uint32_t SHPR1; // 0xE000ED18 - 0xE000ED1B - System Handler Priority Register 1
+    volatile uint32_t SHPR2; // 0xE000ED1C - 0xE000ED1F - System Handler Priority Register 2
+    volatile uint32_t SHPR3; // 0xE000ED20 - 0xE000ED23 - System Handler Priority Register 3
+    volatile uint32_t SHCRS; // 0xE000ED24 - 0xE000ED27 - System Handler Control and State Register
+    volatile uint32_t CFSR;  // 0xE000ED28 - 0xE000ED2B - Configurable Fault Status Register
+    // CFSR subregisters:
+    // uint8_t MMSR // 0xE000ED28 - MemManage Fault Status Register
+    // uint8_t BFSR // 0xE000ED29 - BusFault Status Register
+    // uint16_t UFSR // 0xE000ED2A - 0xE000ED2B - UsageFault Status Register
+    volatile uint32_t HFSR; // 0xE000ED2C - 0xE000ED2F - HardFault Status Register
+    uint32_t RESERVED1;     // 0xE000ED30 - 0xE000ED33
+    volatile uint32_t MMAR; // 0xE000ED34 - 0xE000ED37 - MemManage Fault Address Register
+    volatile uint32_t BFAR; // 0xE000ED38 - 0xE000ED3B - BusFault Address Register
+    volatile uint32_t AFSR; // 0xE000ED3C - 0xE000ED3F - Auxilary Fault Status Register
+} SCB_RegDef_t;
+
 #define NVIC_BASE (0xE000E100UL)
 #define SYST_BASE (0xE000E010UL)
+#define SCB_BASE (0xE000E008Ul)
 
 #define NVIC ((NVIC_RegDef_t *)NVIC_BASE)
 #define SYST ((SYST_RegDef_t *)SYST_BASE)
+#define SCB ((SCB_RegDef_t *)SCB_BASE)
 
 #define SYST_CVR_MAX_RELOAD 0x00FFFFFFUL
 
@@ -65,6 +96,15 @@ __attribute__((always_inline)) static inline void __DMB(void)
 __attribute__((always_inline)) static inline void __NOP(void)
 {
     __asm volatile("nop");
+}
+
+/**
+ * @brief Executes the Wait For Interrupt (WFI) assembly instruction.
+ *        Puts the CPU core into low-power sleep state until an interrupt fires.
+ */
+static inline void __attribute__((always_inline)) __WFI(void)
+{
+    __asm__ volatile("wfi");
 }
 
 static inline void __disable_irq(void)
