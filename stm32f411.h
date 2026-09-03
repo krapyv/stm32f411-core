@@ -231,6 +231,16 @@ typedef struct
     volatile uint32_t CSR; // 0x004, Power control/status register
 } PWR_RegDef_t;
 
+typedef struct
+{
+    volatile uint32_t ACR;     // 0x00, Access control register
+    volatile uint32_t KEYR;    // 0x04, Key register
+    volatile uint32_t OPTKEYR; // 0x08, Option key register
+    volatile uint32_t SR;      // 0x0C, Status register
+    volatile uint32_t CR;      // 0x10, Control register
+    volatile uint32_t OPTCR;   // 0x14, Option control register
+} FLASH_RegDef_t;
+
 // Alternate Function Modes
 typedef enum
 {
@@ -252,6 +262,41 @@ typedef enum
     GPIO_AF15     // 15 (0b1111)
 
 } GPIO_AF_t;
+
+// Flash key
+typedef enum
+{
+    FLASH_KEY1 = 0x45670123,
+    FLASH_KEY2 = 0xCDEF89AB
+} FLASH_KEYR_t;
+
+// Flash option key
+typedef enum
+{
+    FLASH_OPTKEY1 = 0x08192A3B,
+    FLASH_OPTKEY2 = 0x4C5D6E7F,
+} FLASH_OPTKEYR_t;
+
+// Flash Program Size
+typedef enum
+{
+    FLASH_PSIZE_x8 = 0,
+    FLASH_PSIZE_x16,
+    FLASH_PSIZE_x32,
+    FLASH_PSIZE_x64,
+} FLASH_PSIZE_t;
+
+// Flash Sector Number
+typedef enum
+{
+    FLASH_SNB1 = 0,
+    FLASH_SNB2,
+    FLASH_SNB3,
+    FLASH_SNB4,
+    FLASH_SNB5,
+    FLASH_SNB6,
+    FLASH_SNB7,
+} FLASH_SNB_t;
 
 // ================== Base addresses ==================
 
@@ -290,6 +335,9 @@ typedef enum
 #define SYSCFG_BASE 0x40013800UL
 
 #define PWR_BASE 0x40007000UL
+
+#define FLASH_BASE 0x40023C00
+
 // ================== Registers ==================
 
 #define RCC ((RCC_RegDef_t *)RCC_BASE)
@@ -328,5 +376,7 @@ typedef enum
 #define EXTI ((EXTI_RegDef_t *)EXTI_BASE)
 
 #define PWR ((PWR_RegDef_t *)PWR_BASE)
+
+#define FLASH ((FLASH_RegDef_t *)FLASH_BASE)
 
 #endif
