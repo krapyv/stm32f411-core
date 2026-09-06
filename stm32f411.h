@@ -298,6 +298,19 @@ typedef enum
     FLASH_SNB7,
 } FLASH_SNB_t;
 
+// Flash Sector Base addresses
+typedef enum
+{
+    FLASH_SECTOR0 = 0x08000000UL,
+    FLASH_SECTOR1 = 0x08004000UL,
+    FLASH_SECTOR2 = 0x08008000UL,
+    FLASH_SECTOR3 = 0x0800C000UL,
+    FLASH_SECTOR4 = 0x08010000UL,
+    FLASH_SECTOR5 = 0x08020000UL,
+    FLASH_SECTOR6 = 0x08040000UL,
+    FLASH_SECTOR7 = 0x08060000UL,
+} FLASH_Sector_Addresses_t;
+
 // ================== Base addresses ==================
 
 #define RCC_BASE 0x40023800UL
