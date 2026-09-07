@@ -71,11 +71,11 @@ typedef struct
     // uint8_t MMSR // 0xE000ED28 - MemManage Fault Status Register
     // uint8_t BFSR // 0xE000ED29 - BusFault Status Register
     // uint16_t UFSR // 0xE000ED2A - 0xE000ED2B - UsageFault Status Register
-    volatile uint32_t HFSR; // 0xE000ED2C - 0xE000ED2F - HardFault Status Register
-    uint32_t RESERVED1;     // 0xE000ED30 - 0xE000ED33
-    volatile uint32_t MMAR; // 0xE000ED34 - 0xE000ED37 - MemManage Fault Address Register
-    volatile uint32_t BFAR; // 0xE000ED38 - 0xE000ED3B - BusFault Address Register
-    volatile uint32_t AFSR; // 0xE000ED3C - 0xE000ED3F - Auxilary Fault Status Register
+    volatile uint32_t HFSR;  // 0xE000ED2C - 0xE000ED2F - HardFault Status Register
+    uint32_t RESERVED1;      // 0xE000ED30 - 0xE000ED33
+    volatile uint32_t MMFAR; // 0xE000ED34 - 0xE000ED37 - MemManage Fault Address Register
+    volatile uint32_t BFAR;  // 0xE000ED38 - 0xE000ED3B - BusFault Address Register
+    volatile uint32_t AFSR;  // 0xE000ED3C - 0xE000ED3F - Auxilary Fault Status Register
 } SCB_RegDef_t;
 
 #define NVIC_BASE (0xE000E100UL)
