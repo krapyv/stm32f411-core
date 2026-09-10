@@ -289,13 +289,14 @@ typedef enum
 // Flash Sector Number
 typedef enum
 {
-    FLASH_SNB1 = 0,
-    FLASH_SNB2,
-    FLASH_SNB3,
-    FLASH_SNB4,
-    FLASH_SNB5,
-    FLASH_SNB6,
-    FLASH_SNB7,
+    FLASH_SNB0 = (0 << 3),
+    FLASH_SNB1 = (1 << 3),
+    FLASH_SNB2 = (2 << 3),
+    FLASH_SNB3 = (3 << 3),
+    FLASH_SNB4 = (4 << 3),
+    FLASH_SNB5 = (5 << 3),
+    FLASH_SNB6 = (6 << 3),
+    FLASH_SNB7 = (7 << 3),
 } FLASH_SNB_t;
 
 // Flash Sector Base addresses
