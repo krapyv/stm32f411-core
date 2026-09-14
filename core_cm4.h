@@ -116,4 +116,29 @@ static inline void __enable_irq(void)
 {
     __asm__ volatile("cpsie i" : : : "memory");
 }
+
+static inline void __attribute__((always_inline)) __set_basepri(uint8_t priority)
+{
+    uint8_t shifted_priority = (priority << 4U);
+
+    __asm__ volatile(
+        "msr basepri, %0"
+        :
+        : "r"(shifted_priority)
+        : "memory");
+}
+
+static inline uint32_t __attribute__((always_inline)) __get_basepri(void)
+{
+    uint32_t result;
+
+    __asm__ volatile(
+        "mrs %0, basepri"
+        : "=r"(result)
+        :
+        :);
+
+    return (result >> 4U);
+}
+
 #endif
