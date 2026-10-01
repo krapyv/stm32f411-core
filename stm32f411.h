@@ -241,6 +241,13 @@ typedef struct
     volatile uint32_t OPTCR;   // 0x14, Option control register
 } FLASH_RegDef_t;
 
+typedef struct
+{
+    volatile uint32_t DR;  // 0x00, Data register
+    volatile uint32_t IDR; // 0x04, Independent dta register
+    volatile uint32_t CR;  // 0x08, Control register
+} CRC_RegDef_t;
+
 // Alternate Function Modes
 typedef enum
 {
@@ -350,7 +357,9 @@ typedef enum
 
 #define PWR_BASE 0x40007000UL
 
-#define FLASH_BASE 0x40023C00
+#define FLASH_BASE 0x40023C00UL
+
+#define CRC_BASE 0x40023000UL
 
 // ================== Registers ==================
 
@@ -392,5 +401,7 @@ typedef enum
 #define PWR ((PWR_RegDef_t *)PWR_BASE)
 
 #define FLASH ((FLASH_RegDef_t *)FLASH_BASE)
+
+#define CRC ((CRC_RegDef_t *)CRC_BASE)
 
 #endif
