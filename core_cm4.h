@@ -78,13 +78,28 @@ typedef struct
     volatile uint32_t AFSR;  // 0xE000ED3C - 0xE000ED3F - Auxilary Fault Status Register
 } SCB_RegDef_t;
 
+typedef struct
+{
+    volatile uint32_t FPCCR;  // 0xE000EF34 - Floating-point context control register
+    volatile uint32_t FPCAR;  // 0xE000EF38 - Floating-point context address register
+    volatile uint32_t FPDSCR; // 0xE000EF3C - Floating-point default status control register
+    // FPSCR is not mapped
+} FPU_RegDef_t;
+
 #define NVIC_BASE (0xE000E100UL)
 #define SYST_BASE (0xE000E010UL)
-#define SCB_BASE (0xE000E008Ul)
+#define SCB_BASE (0xE000E008UL)
+#define FPU_BASE (0xE000ED88)
+
+#define SCB_CPACR_BASE (0xE000ED88UL)
 
 #define NVIC ((NVIC_RegDef_t *)NVIC_BASE)
 #define SYST ((SYST_RegDef_t *)SYST_BASE)
 #define SCB ((SCB_RegDef_t *)SCB_BASE)
+#define FPU ((FPU_RegDef_t *)FPU_BASE)
+
+// Standalone Coprocessor Control register
+#define SCB_CPACR (*(volatile uint32_t *)SCB_CPACR_BASE)
 
 #define SYST_CVR_MAX_RELOAD 0x00FFFFFFUL
 
