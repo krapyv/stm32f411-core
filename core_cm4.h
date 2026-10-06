@@ -76,7 +76,7 @@ typedef struct
     volatile uint32_t MMFAR; // 0xE000ED34 - 0xE000ED37 - MemManage Fault Address Register
     volatile uint32_t BFAR;  // 0xE000ED38 - 0xE000ED3B - BusFault Address Register
     volatile uint32_t AFSR;  // 0xE000ED3C - 0xE000ED3F - Auxilary Fault Status Register
-    uint32_t RESERVED2;      // 0xE000ED88 - 0xE000ED40
+    uint32_t RESERVED2[18];  // 0xE000ED40 - 0xE000ED88 = 0x48 = 72 bytes = 576 bits = 18 uint32_t
     volatile uint32_t CPACR; // 0xE000ED88 - 0xE000ED8B - Coprocessor Control register
 } SCB_RegDef_t;
 
