@@ -110,6 +110,16 @@ __attribute__((always_inline)) static inline void __NOP(void)
     __asm volatile("nop");
 }
 
+__attribute__((always_inline)) static inline void __DSB(void)
+{
+    __asm volatile("dsb" ::: "memory");
+}
+
+__attribute__((always_inline)) static inline void __ISB(void)
+{
+    __asm volatile("isb" ::: "memory");
+}
+
 /**
  * @brief Executes the Wait For Interrupt (WFI) assembly instruction.
  *        Puts the CPU core into low-power sleep state until an interrupt fires.
