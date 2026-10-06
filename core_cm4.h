@@ -76,6 +76,8 @@ typedef struct
     volatile uint32_t MMFAR; // 0xE000ED34 - 0xE000ED37 - MemManage Fault Address Register
     volatile uint32_t BFAR;  // 0xE000ED38 - 0xE000ED3B - BusFault Address Register
     volatile uint32_t AFSR;  // 0xE000ED3C - 0xE000ED3F - Auxilary Fault Status Register
+    uint32_t RESERVED2;      // 0xE000ED88 - 0xE000ED40
+    volatile uint32_t CPACR; // 0xE000ED88 - 0xE000ED8B - Coprocessor Control register
 } SCB_RegDef_t;
 
 typedef struct
@@ -89,17 +91,12 @@ typedef struct
 #define NVIC_BASE (0xE000E100UL)
 #define SYST_BASE (0xE000E010UL)
 #define SCB_BASE (0xE000E008UL)
-#define FPU_BASE (0xE000ED88)
-
-#define SCB_CPACR_BASE (0xE000ED88UL)
+#define FPU_BASE (0xE000ED88UL)
 
 #define NVIC ((NVIC_RegDef_t *)NVIC_BASE)
 #define SYST ((SYST_RegDef_t *)SYST_BASE)
 #define SCB ((SCB_RegDef_t *)SCB_BASE)
 #define FPU ((FPU_RegDef_t *)FPU_BASE)
-
-// Standalone Coprocessor Control register
-#define SCB_CPACR (*(volatile uint32_t *)SCB_CPACR_BASE)
 
 #define SYST_CVR_MAX_RELOAD 0x00FFFFFFUL
 
